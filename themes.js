@@ -279,10 +279,10 @@
         r.setProperty('--border', `rgba(255,255,255,${(ba * 0.3).toFixed(3)})`);
         r.setProperty('--bg-overlay', `hsla(${oh}, ${os}%, ${ol}%, ${oa.toFixed(3)})`);
 
-        // Map filter: desaturate + dark tint for neutral look
+        // Map filter: dark mode tinted to match site hue
         const map = document.querySelector('.hero-right iframe');
         if (map) map.style.filter = bgL > 40 ? 'none'
-            : 'invert(90%) hue-rotate(180deg) brightness(0.85) contrast(1.1) saturate(0.15)';
+            : `invert(92%) hue-rotate(${180 + (h - 222)}deg) brightness(0.55) contrast(1.3) saturate(0.3)`;
 
         document.documentElement.style.scrollbarColor =
             `${hsl(ah, as, 55)} ${hsl(h, Math.min(s, 40), bgL)}`;
