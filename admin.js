@@ -80,14 +80,38 @@
         #sp-save-btn:hover { opacity: 0.88; }
         #sp-save-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
-        /* Admin nav links */
+        /* Admin nav links — same base style as regular links, accent dot to differentiate */
         .admin-nav-link {
             color: var(--text-sec) !important;
-            font-size: 0.82rem !important;
-            opacity: 0.7;
-            transition: opacity 0.2s;
+            font-size: 0.85rem !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.3px;
+            opacity: 1;
+            transition: color 0.2s;
+            position: relative;
+            padding-left: 10px !important;
         }
-        .admin-nav-link:hover { opacity: 1; }
+        .admin-nav-link::before {
+            content: '';
+            position: absolute; left: 0; top: 50%;
+            width: 4px; height: 4px; border-radius: 50%;
+            background: var(--accent); opacity: 0.5;
+            transform: translateY(-50%);
+        }
+        .admin-nav-link:hover { color: var(--text) !important; opacity: 1; }
+
+        /* Mobile menu admin links — match mobile style */
+        #mobile-menu .admin-nav-link {
+            font-family: var(--display) !important;
+            font-size: 1.6rem !important;
+            font-weight: 600 !important;
+            color: var(--text) !important;
+            letter-spacing: 1px;
+            padding-left: 16px !important;
+        }
+        #mobile-menu .admin-nav-link::before {
+            width: 6px; height: 6px;
+        }
 
         /* Admin info section in panel */
         .sp-admin-info {
