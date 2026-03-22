@@ -95,9 +95,9 @@ nav.scrolled {
 }
 .hero::after {
     content: '';
-    position: absolute; bottom: 0; left: 0; right: 0;
-    height: 220px;
-    background: linear-gradient(to bottom, transparent, var(--bg));
+    position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 300px;
+    background: linear-gradient(to bottom, transparent 0%, var(--bg-alt) 100%);
     pointer-events: none;
     z-index: 1;
 }
