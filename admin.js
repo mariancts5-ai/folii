@@ -7,6 +7,7 @@
 
     // ── Init Supabase client ───────────────────────────────────────────
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    window.__sb = sb; // expose for content-editor.js
 
     // ── Load & apply public settings (runs for ALL visitors) ──────────
     try {
@@ -133,6 +134,19 @@
             li1.appendChild(a1);
             navLinks.appendChild(li1);
 
+            const liContent = document.createElement('li');
+            liContent.id = 'admin-nav-content';
+            const aContent = document.createElement('a');
+            aContent.href = '#';
+            aContent.className = 'admin-nav-link';
+            aContent.innerHTML = '<i class="fas fa-pen"></i> Con\u021binut';
+            aContent.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.__openContentEditor) window.__openContentEditor();
+            });
+            liContent.appendChild(aContent);
+            navLinks.appendChild(liContent);
+
             const li2 = document.createElement('li');
             li2.id = 'admin-nav-logout';
             const a2 = document.createElement('a');
@@ -164,6 +178,18 @@
             });
             mobileMenu.appendChild(mli1);
 
+            const mliContent = document.createElement('li');
+            mliContent.className = 'admin-mobile-item';
+            mliContent.innerHTML = '<a href="#" class="admin-nav-link"><i class="fas fa-pen"></i> Con\u021binut</a>';
+            mliContent.querySelector('a').addEventListener('click', (e) => {
+                e.preventDefault();
+                if (window.__openContentEditor) window.__openContentEditor();
+                document.getElementById('mobile-menu')?.classList.remove('open');
+                document.querySelector('.nav-toggle')?.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            mobileMenu.appendChild(mliContent);
+
             const mli2 = document.createElement('li');
             mli2.className = 'admin-mobile-item';
             mli2.innerHTML = '<a href="#" class="admin-nav-link"><i class="fas fa-right-from-bracket"></i> Deconectare</a>';
@@ -180,6 +206,7 @@
     // ── Remove admin UI on logout ─────────────────────────────────────
     function removeAdminUI() {
         document.getElementById('admin-nav-items')?.remove();
+        document.getElementById('admin-nav-content')?.remove();
         document.getElementById('admin-nav-logout')?.remove();
         document.querySelectorAll('.admin-mobile-item').forEach(el => el.remove());
         document.getElementById('sp-save-btn')?.remove();
