@@ -23,7 +23,7 @@
     });
 
     // Base theme values (Bleumarin închis + Auriu)
-    const BASE = { hue: 222, sat: 55, bgL: 5, cardL: 9, accent: 40, accentSat: 68, textL: 88, borderA: 20, bgOverlayAlpha: 50, bgOverlayHue: 0 };
+    const BASE = { hue: 222, sat: 55, bgL: 5, cardL: 9, accent: 40, accentSat: 68, textL: 88, borderA: 20, bgOverlayAlpha: 50, bgOverlayHue: 0, bgOverlaySat: 0, bgOverlayL: 10 };
 
     const SLIDERS = [
         { id: 'bgL',       label: 'Darkness fundal',    min: 0, max: 20, val: BASE.bgL, unit: '%', flip: true },
@@ -33,9 +33,11 @@
         { id: 'accent',    label: 'Nuanță accent',      min: 0, max: 360, val: BASE.accent, unit: '°' },
         { id: 'accentSat', label: 'Saturație accent',   min: 10, max: 100, val: BASE.accentSat, unit: '%' },
         { id: 'textL',     label: 'Luminozitate text',  min: 50, max: 100, val: BASE.textL, unit: '%' },
-        { id: 'borderA',   label: 'Vizibilitate borduri', min: 0, max: 60, val: BASE.borderA, unit: '%' },
-        { id: 'bgOverlayAlpha', label: 'Darkness overlay', min: 0, max: 100, val: BASE.bgOverlayAlpha, unit: '%', flip: true },
-        { id: 'bgOverlayHue',   label: 'Nuanță overlay',   min: 0, max: 360, val: BASE.bgOverlayHue, unit: '°' },
+        { id: 'borderA',       label: 'Vizibilitate borduri', min: 0, max: 60, val: BASE.borderA, unit: '%' },
+        { id: 'bgOverlayAlpha', label: 'Opacitate overlay', min: 0, max: 100, val: BASE.bgOverlayAlpha, unit: '%', flip: true },
+        { id: 'bgOverlayHue',   label: 'Nuanță overlay',    min: 0, max: 360, val: BASE.bgOverlayHue, unit: '°' },
+        { id: 'bgOverlaySat',   label: 'Saturație overlay',  min: 0, max: 100, val: BASE.bgOverlaySat, unit: '%' },
+        { id: 'bgOverlayL',     label: 'Luminozitate overlay', min: 0, max: 50, val: BASE.bgOverlayL, unit: '%' },
     ];
 
     const state = {};
@@ -71,6 +73,8 @@
         const ba = state.borderA / 100;
         const overlayAlpha = state.bgOverlayAlpha / 100;
         const overlayHue = state.bgOverlayHue;
+        const overlaySat = state.bgOverlaySat;
+        const overlayL = state.bgOverlayL;
 
         // Backgrounds — solid colors, no gradients
         r.setProperty('--bg', hsl(h, Math.min(s, 40), bgL));
@@ -90,8 +94,8 @@
         // Borders
         r.setProperty('--border', `rgba(255,255,255,${(ba * 0.3).toFixed(3)})`);
 
-        // Background overlay (mask)
-        r.setProperty('--bg-overlay', `hsla(${overlayHue}, 50%, 10%, ${overlayAlpha.toFixed(3)})`);
+        // Background overlay (mask) — HSL with full control
+        r.setProperty('--bg-overlay', `hsla(${overlayHue}, ${overlaySat}%, ${overlayL}%, ${overlayAlpha.toFixed(3)})`);
 
         // Map filter
         const map = document.querySelector('.hero-right iframe');
