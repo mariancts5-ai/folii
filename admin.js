@@ -3,7 +3,7 @@
 (async function () {
 
     const SUPABASE_URL = 'https://uzmpxtfwflfujpeqljjw.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_0MQyDbnsmcJaOPgOt7CcdQ_2C_qGbCs';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6bXB4dGZ3ZmxmdWpwZXFsamp3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxODc2MTYsImV4cCI6MjA4OTc2MzYxNn0.EAqCmoTwI_hi00ZwWHY8AX2pgKJA2TMUC7WhHrUDEiM';
 
     // ── Init Supabase client ───────────────────────────────────────────
     const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
