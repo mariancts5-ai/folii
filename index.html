@@ -14,6 +14,38 @@
         :root { --bg-overlay: rgba(0,0,0,0.5); }
         body { background: url('images/bg.jpg') center/cover fixed; }
         #bg-overlay { background: var(--bg-overlay); }
+
+        /* ── Button variant rows ── */
+        .btn-variants { display: flex; flex-direction: column; gap: 10px; }
+        .btn-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .btn-row-label {
+            font-size: 0.62rem; font-weight: 700; letter-spacing: 1.5px;
+            color: var(--text-muted); text-transform: uppercase; width: 16px; flex-shrink: 0;
+        }
+
+        /* A — Solid alb + WhatsApp solid discret */
+        .btn-vA-call { background: #fff; color: #111; font-weight: 700; }
+        .btn-vA-call:hover { opacity: 0.9; color: #111; }
+        .btn-vA-wa   { background: #1f8c44; color: #fff; }
+        .btn-vA-wa:hover { opacity: 0.9; color: #fff; }
+
+        /* B — Solid accent + WhatsApp outline discret */
+        .btn-vB-call { background: var(--accent); color: #fff; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+        .btn-vB-call:hover { opacity: 0.88; color: #fff; }
+        .btn-vB-wa   { background: transparent; border: 1.5px solid #1f8c44; color: #1f8c44; }
+        .btn-vB-wa:hover { background: rgba(31,140,68,0.1); }
+
+        /* C — Ambele outline, accent și verde */
+        .btn-vC-call { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+        .btn-vC-call:hover { background: var(--accent-dim); }
+        .btn-vC-wa   { background: transparent; border: 1.5px solid #1f8c44; color: #1f8c44; }
+        .btn-vC-wa:hover { background: rgba(31,140,68,0.1); }
+
+        /* D — Semi-transparent glass */
+        .btn-vD-call { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; font-weight: 600; backdrop-filter: blur(6px); }
+        .btn-vD-call:hover { background: rgba(255,255,255,0.22); color: #fff; }
+        .btn-vD-wa   { background: rgba(31,140,68,0.2); border: 1px solid rgba(31,140,68,0.5); color: #4cd07d; backdrop-filter: blur(6px); }
+        .btn-vD-wa:hover { background: rgba(31,140,68,0.3); color: #4cd07d; }
     </style>
 </head>
 <body>
@@ -58,9 +90,31 @@
                         <div><strong>Bulevardul Tomis 358</strong><div class="sub">Constanța</div></div>
                     </a>
                 </div>
-                <div class="hero-cta">
-                    <a href="tel:+40721289892" class="btn btn-accent"><i class="fas fa-phone"></i> Sună acum</a>
-                    <a href="https://wa.me/40721289892" class="btn btn-outline" style="color: #25D366; border-color: #25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <div class="btn-variants">
+                    <!-- A: Solid alb + Verde solid discret -->
+                    <div class="btn-row">
+                        <span class="btn-row-label">A</span>
+                        <a href="tel:+40721289892" class="btn btn-vA-call"><i class="fas fa-phone"></i> Sună acum</a>
+                        <a href="https://wa.me/40721289892" class="btn btn-vA-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                    <!-- B: Solid accent + Verde outline discret -->
+                    <div class="btn-row">
+                        <span class="btn-row-label">B</span>
+                        <a href="tel:+40721289892" class="btn btn-vB-call"><i class="fas fa-phone"></i> Sună acum</a>
+                        <a href="https://wa.me/40721289892" class="btn btn-vB-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                    <!-- C: Ambele outline -->
+                    <div class="btn-row">
+                        <span class="btn-row-label">C</span>
+                        <a href="tel:+40721289892" class="btn btn-vC-call"><i class="fas fa-phone"></i> Sună acum</a>
+                        <a href="https://wa.me/40721289892" class="btn btn-vC-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                    <!-- D: Glass / semi-transparent -->
+                    <div class="btn-row">
+                        <span class="btn-row-label">D</span>
+                        <a href="tel:+40721289892" class="btn btn-vD-call"><i class="fas fa-phone"></i> Sună acum</a>
+                        <a href="https://wa.me/40721289892" class="btn btn-vD-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
                 </div>
             </div>
             <div class="hero-right reveal">
