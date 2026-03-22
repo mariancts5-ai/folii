@@ -10,8 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --bg-overlay: rgba(0,0,0,0.5); }
+        body { background: url('images/bg.jpg') center/cover fixed; }
+        #bg-overlay { background: var(--bg-overlay); }
+    </style>
 </head>
 <body>
+<div id="bg-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-overlay, rgba(0,0,0,0.5)); pointer-events:none; z-index:-1;"></div>
 
 <!-- Nav -->
 <nav id="navbar">
@@ -45,7 +51,7 @@
                 <div class="hero-contacts">
                     <a href="tel:+40721289892" class="hero-contact">
                         <i class="fas fa-phone"></i>
-                        <div><strong>0721 289 892</strong><div class="sub">L-S: 08:00 - 18:00</div></div>
+                        <div><strong>0721 289 892</strong><div class="sub">L-V: 08-18 &bull; S: 09-14</div></div>
                     </a>
                     <a href="https://maps.google.com/?q=44.2094929,28.6154749" target="_blank" class="hero-contact">
                         <i class="fas fa-location-dot"></i>
@@ -54,7 +60,7 @@
                 </div>
                 <div class="hero-cta">
                     <a href="tel:+40721289892" class="btn btn-accent"><i class="fas fa-phone"></i> Sună acum</a>
-                    <a href="https://wa.me/40721289892" class="btn btn-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://wa.me/40721289892" class="btn btn-outline" style="color: #25D366; border-color: #25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
                 </div>
             </div>
             <div class="hero-right reveal">
@@ -75,28 +81,40 @@
         <div class="section-title reveal">Lucrări recente</div>
         <div class="gallery-grid">
             <div class="gallery-item wide reveal">
-                <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=900&q=80" alt="BMW folii" loading="lazy">
-                <div class="gallery-cap"><span>BMW — folii ceramice</span></div>
+                <img src="images/display/p1.jpg" alt="Lucrare 1" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 1</span></div>
             </div>
             <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=600&q=80" alt="Folii fumurii" loading="lazy">
-                <div class="gallery-cap"><span>Folii fumurii 20%</span></div>
+                <img src="images/display/p2.jpg" alt="Lucrare 2" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 2</span></div>
             </div>
             <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=600&q=80" alt="Parbriz Mercedes" loading="lazy">
-                <div class="gallery-cap"><span>Parbriz — Mercedes S</span></div>
+                <img src="images/display/p3.jpg" alt="Lucrare 3" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 3</span></div>
             </div>
             <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="PPF Porsche" loading="lazy">
-                <div class="gallery-cap"><span>PPF — Porsche 911</span></div>
-            </div>
-            <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1525609004556-c46c64b6e31e?auto=format&fit=crop&w=600&q=80" alt="Folii auto" loading="lazy">
-                <div class="gallery-cap"><span>Folie ceramică 15%</span></div>
+                <img src="images/display/p4.jpg" alt="Lucrare 4" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 4</span></div>
             </div>
             <div class="gallery-item wide reveal">
-                <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=900&q=80" alt="Detailing auto" loading="lazy">
-                <div class="gallery-cap"><span>PPF protecție completă</span></div>
+                <img src="images/display/p5.jpg" alt="Lucrare 5" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 5</span></div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="images/display/p6.jpg" alt="Lucrare 6" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 6</span></div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="images/display/p7.jpg" alt="Lucrare 7" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 7</span></div>
+            </div>
+            <div class="gallery-item reveal">
+                <img src="images/display/p8.jpg" alt="Lucrare 8" loading="lazy">
+                <div class="gallery-cap"><span>Lucrare 8</span></div>
+            </div>
+            <div class="gallery-item wide reveal">
+                <video src="images/display/v1.mp4" alt="Video 1" controls loading="lazy" style="width:100%; height:100%; object-fit:cover;"></video>
+                <div class="gallery-cap"><span>Videoclip</span></div>
             </div>
         </div>
     </div>
