@@ -192,6 +192,7 @@
         hue: 222, sat: 58, bgL: 5, cardL: 9,
         accent: 0, accentSat: 61, textL: 99, borderA: 35,
         bgOverlayAlpha: 81, bgOverlayHue: 240, bgOverlaySat: 28, bgOverlayL: 3,
+        mapInvert: 92, mapBright: 55, mapContrast: 130, mapSat: 30,
     };
 
     const SLIDER_GROUPS = [
@@ -213,6 +214,12 @@
             { id: 'bgOverlayHue',   label: 'Nuan\u021b\u0103',     min: 0,  max: 360, val: BASE.bgOverlayHue,   unit: '\u00b0' },
             { id: 'bgOverlaySat',   label: 'Satura\u021bie',  min: 0,  max: 75,  val: BASE.bgOverlaySat,   unit: '%' },
             { id: 'bgOverlayL',     label: 'Luminozitate', min: 0,  max: 25,  val: BASE.bgOverlayL,     unit: '%' },
+        ]},
+        { cat: 'Set\u0103ri hart\u0103', sliders: [
+            { id: 'mapInvert',   label: 'Inversare',    min: 0,  max: 100, val: BASE.mapInvert,   unit: '%' },
+            { id: 'mapBright',   label: 'Luminozitate', min: 20, max: 100, val: BASE.mapBright,   unit: '%' },
+            { id: 'mapContrast', label: 'Contrast',     min: 80, max: 180, val: BASE.mapContrast, unit: '%' },
+            { id: 'mapSat',      label: 'Satura\u021bie',  min: 0,  max: 100, val: BASE.mapSat,      unit: '%' },
         ]},
         { cat: 'Carduri', sliders: [
             { id: 'cardL', label: 'Darkness',  min: 2,  max: 18, val: BASE.cardL, unit: '%', flip: true },
@@ -279,10 +286,14 @@
         r.setProperty('--border', `rgba(255,255,255,${(ba * 0.3).toFixed(3)})`);
         r.setProperty('--bg-overlay', `hsla(${oh}, ${os}%, ${ol}%, ${oa.toFixed(3)})`);
 
-        // Map filter: dark mode tinted to match site hue
+        // Map filter: controlled by sliders, hue-rotate matches site hue
         const map = document.querySelector('.hero-right iframe');
-        if (map) map.style.filter = bgL > 40 ? 'none'
-            : `invert(92%) hue-rotate(${180 + (h - 222)}deg) brightness(0.55) contrast(1.3) saturate(0.3)`;
+        if (map) {
+            const mi = state.mapInvert, mb = state.mapBright / 100;
+            const mc = state.mapContrast / 100, ms = state.mapSat / 100;
+            map.style.filter = mi === 0 && mb === 1 && mc === 1 && ms === 1 ? 'none'
+                : `invert(${mi}%) hue-rotate(${180 + (h - 222)}deg) brightness(${mb}) contrast(${mc}) saturate(${ms})`;
+        }
 
         document.documentElement.style.scrollbarColor =
             `${hsl(ah, as, 55)} ${hsl(h, Math.min(s, 40), bgL)}`;
