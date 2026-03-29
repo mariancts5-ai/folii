@@ -1,0 +1,25 @@
+{
+  "name": "folii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "admin.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariancts5-ai/folii.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/mariancts5-ai/folii/issues"
+  },
+  "homepage": "https://github.com/mariancts5-ai/folii#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

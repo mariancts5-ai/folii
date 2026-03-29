@@ -1,2 +1,6 @@
 localnotes.txt
 supabase-setup.sql
+node_modules/
+test-results/
+playwright-report/
+.vscode/
