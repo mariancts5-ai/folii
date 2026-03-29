@@ -1,0 +1,238 @@
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Builder";
+    ViewData["BodyClass"] = "page-builder";
+    var themes = (IReadOnlyList<FoliiBuilder.Web.Models.ThemeDefinition>)ViewBag.Themes;
+    var modules = (IReadOnlyList<FoliiBuilder.Web.Models.ModuleDefinition>)ViewBag.Modules;
+    var fonts = (IReadOnlyList<string>)ViewBag.Fonts;
+    var selectedTheme = (string)ViewBag.SelectedTheme;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/builder.css" asp-append-version="true" />
+}
+
+<!-- Builder toolbar -->
+<header class="builder-toolbar">
+    <div class="builder-toolbar-left">
+        <a href="/" class="builder-logo"><i class="fas fa-layer-group"></i> FoliiBuilder</a>
+    </div>
+    <div class="builder-toolbar-center">
+        <button class="toolbar-btn" id="btn-generate" title="Generează conținut automat">
+            <i class="fas fa-wand-magic-sparkles"></i> Generează conținut
+        </button>
+    </div>
+    <div class="builder-toolbar-right">
+        <button class="toolbar-btn toolbar-btn--accent" id="btn-export" title="Descarcă arhiva cu site-ul">
+            <i class="fas fa-download"></i> Descarcă site
+        </button>
+    </div>
+</header>
+
+<!-- Builder layout -->
+<div class="builder-layout">
+    <!-- Left sidebar -->
+    <aside class="builder-sidebar" id="sidebar">
+        <div class="sidebar-scroll">
+
+            <!-- Theme selection -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading"><i class="fas fa-palette"></i> Temă</h3>
+                <div class="theme-list" id="theme-list">
+                    @foreach (var theme in themes)
+                    {
+                        <button class="theme-card @(theme.Id == selectedTheme ? "active" : "")" data-theme="@theme.Id">
+                            <i class="fas @theme.Icon"></i>
+                            <span>@theme.Name</span>
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <!-- Global params -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading"><i class="fas fa-sliders"></i> Parametri globali</h3>
+                <div class="param-group">
+                    <label>Culoare accent</label>
+                    <div class="param-row">
+                        <span class="param-label">Nuanță</span>
+                        <input type="range" min="0" max="360" class="global-param" data-param="accentHue">
+                        <span class="param-val" data-for="accentHue"></span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-label">Saturație</span>
+                        <input type="range" min="0" max="100" class="global-param" data-param="accentSat">
+                        <span class="param-val" data-for="accentSat"></span>
+                    </div>
+                </div>
+                <div class="param-group">
+                    <label>Fundal</label>
+                    <div class="param-row">
+                        <span class="param-label">Nuanță</span>
+                        <input type="range" min="0" max="360" class="global-param" data-param="bgHue">
+                        <span class="param-val" data-for="bgHue"></span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-label">Saturație</span>
+                        <input type="range" min="0" max="100" class="global-param" data-param="bgSat">
+                        <span class="param-val" data-for="bgSat"></span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-label">Luminozitate</span>
+                        <input type="range" min="0" max="20" class="global-param" data-param="bgLightness">
+                        <span class="param-val" data-for="bgLightness"></span>
+                    </div>
+                </div>
+                <div class="param-group">
+                    <label>Text & Borduri</label>
+                    <div class="param-row">
+                        <span class="param-label">Luminozitate text</span>
+                        <input type="range" min="60" max="100" class="global-param" data-param="textLightness">
+                        <span class="param-val" data-for="textLightness"></span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-label">Borduri</span>
+                        <input type="range" min="0" max="40" class="global-param" data-param="borderAlpha">
+                        <span class="param-val" data-for="borderAlpha"></span>
+                    </div>
+                    <div class="param-row">
+                        <span class="param-label">Rotunjire</span>
+                        <input type="range" min="0" max="24" class="global-param" data-param="borderRadius">
+                        <span class="param-val" data-for="borderRadius"></span>
+                    </div>
+                </div>
+                <div class="param-group">
+                    <label>Carduri</label>
+                    <div class="param-row">
+                        <span class="param-label">Luminozitate</span>
+                        <input type="range" min="3" max="20" class="global-param" data-param="cardLightness">
+                        <span class="param-val" data-for="cardLightness"></span>
+                    </div>
+                </div>
+                <div class="param-group">
+                    <label>Font</label>
+                    <select class="global-param-select" data-param="fontFamily" id="font-select">
+                        @foreach (var font in fonts)
+                        {
+                            <option value="@font">@font</option>
+                        }
+                    </select>
+                </div>
+                <div class="param-group">
+                    <label>Stil butoane</label>
+                    <select class="global-param-select" data-param="buttonStyle" id="btn-style-select">
+                        <option value="solid">Solid</option>
+                        <option value="outline">Contur</option>
+                        <option value="glass">Sticlă</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Module toggles -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-heading"><i class="fas fa-puzzle-piece"></i> Module</h3>
+                <div class="module-list" id="module-list">
+                    @foreach (var mod in modules)
+                    {
+                        <div class="module-item" data-module="@mod.Id">
+                            <div class="module-header">
+                                <label class="module-toggle">
+                                    <input type="checkbox" class="module-checkbox" data-module="@mod.Id"
+                                           @(mod.AlwaysOn ? "checked disabled" : "checked")>
+                                    <span class="module-toggle-slider"></span>
+                                </label>
+                                <span class="module-name"><i class="fas @mod.Icon"></i> @mod.Name</span>
+                                @if (mod.Parameters.Count > 0)
+                                {
+                                    <button class="module-expand" data-module="@mod.Id" title="Parametri modul">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                }
+                            </div>
+                            @if (mod.Parameters.Count > 0)
+                            {
+                                <div class="module-params" id="params-@mod.Id" style="display:none;">
+                                    @foreach (var param in mod.Parameters)
+                                    {
+                                        <div class="module-param-row">
+                                            @if (param.Type == "range")
+                                            {
+                                                <span class="param-label">@param.Label</span>
+                                                <input type="range"
+                                                       min="@param.Min" max="@param.Max"
+                                                       value="@param.DefaultValue"
+                                                       class="module-param"
+                                                       data-module="@mod.Id"
+                                                       data-param="@param.Id">
+                                                <span class="param-val" data-for="@(mod.Id)-@(param.Id)">@param.DefaultValue</span>
+                                            }
+                                            else if (param.Type == "select")
+                                            {
+                                                <span class="param-label">@param.Label</span>
+                                                <select class="module-param-select"
+                                                        data-module="@mod.Id"
+                                                        data-param="@param.Id">
+                                                    @if (param.Options != null)
+                                                    {
+                                                        @foreach (var opt in param.Options)
+                                                        {
+                                                            var isSelected = opt.Value == param.DefaultValue?.ToString();
+                                                            if (isSelected)
+                                                            {
+                                                                <option value="@opt.Value" selected>@opt.Label</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@opt.Value">@opt.Label</option>
+                                                            }
+                                                        }
+                                                    }
+                                                </select>
+                                            }
+                                            else if (param.Type == "toggle")
+                                            {
+                                                <label class="param-toggle">
+                                                    <input type="checkbox"
+                                                           class="module-param-toggle"
+                                                           data-module="@mod.Id"
+                                                           data-param="@param.Id"
+                                                           @(param.DefaultValue?.ToString() == "True" ? "checked" : "")>
+                                                    <span>@param.Label</span>
+                                                </label>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Preview area -->
+    <main class="builder-preview">
+        <div class="preview-container">
+            <iframe id="preview-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+        <div class="preview-loading" id="preview-loading">
+            <div class="preview-spinner"></div>
+            <span>Se încarcă previzualizarea...</span>
+        </div>
+    </main>
+</div>
+
+<!-- Pass data to JS -->
+<script>
+    window.__BUILDER_DATA__ = {
+        themes: @Html.Raw(JsonSerializer.Serialize(themes, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })),
+        modules: @Html.Raw(JsonSerializer.Serialize(modules, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase })),
+        fonts: @Html.Raw(JsonSerializer.Serialize(fonts)),
+        selectedTheme: "@selectedTheme"
+    };
+</script>
+
+@section Scripts {
+    <script src="~/js/builder.js" asp-append-version="true"></script>
+}

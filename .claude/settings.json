@@ -12,7 +12,10 @@
       "Bash(git diff:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(rm -rf images/)",
+      "Bash(rm script.js admin.js content-editor.js themes.js style.css index.html favico.png user_prefs.md)",
+      "Bash(rm -f supabase-setup.sql localnotes.txt)"
     ],
     "deny": [
       "Bash(rm -rf /)",

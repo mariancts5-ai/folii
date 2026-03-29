@@ -1,0 +1,117 @@
+@{
+    ViewData["Title"] = "Creează site-ul perfect pentru afacerea ta";
+    ViewData["BodyClass"] = "page-home";
+    var themes = (IReadOnlyList<FoliiBuilder.Web.Models.ThemeDefinition>)ViewBag.Themes;
+}
+
+<div class="landing">
+    <!-- Hero -->
+    <section class="landing-hero">
+        <div class="landing-hero-bg"></div>
+        <div class="landing-inner">
+            <p class="landing-badge"><i class="fas fa-wand-magic-sparkles"></i> Site Builder</p>
+            <h1>
+                Dacă vrei să îți transformi <span class="accent">visul</span> unui site
+                pentru afacerea ta în realitate,<br>
+                te afli în <span class="accent">locul potrivit</span>.
+            </h1>
+            <p class="landing-subtitle">
+                Alege o temă, personalizează în câteva clicuri și descarcă site-ul tău — gata de publicare.
+            </p>
+            <a href="/Builder" class="landing-cta">
+                <span>Începe acum</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Themes preview -->
+    <section class="landing-section">
+        <div class="landing-inner">
+            <p class="landing-label">Teme disponibile</p>
+            <h2>Alege tipul afacerii tale</h2>
+            <div class="landing-themes">
+                @foreach (var theme in themes)
+                {
+                    <a href="/Builder?theme=@theme.Id" class="landing-theme-card">
+                        <div class="landing-theme-icon"><i class="fas @theme.Icon"></i></div>
+                        <h3>@theme.Name</h3>
+                        <p>@theme.Description</p>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="landing-section landing-section--alt">
+        <div class="landing-inner">
+            <p class="landing-label">Cum funcționează</p>
+            <h2>3 pași simpli</h2>
+            <div class="landing-steps">
+                <div class="landing-step">
+                    <div class="landing-step-num">1</div>
+                    <h3>Alege o temă</h3>
+                    <p>Selectează tipul de afacere — cafenea, frizerie, restaurant, firmă IT și multe altele.</p>
+                </div>
+                <div class="landing-step">
+                    <div class="landing-step-num">2</div>
+                    <h3>Personalizează</h3>
+                    <p>Modifică culorile, fonturile, secțiunile active și conținutul. Vezi schimbările în timp real.</p>
+                </div>
+                <div class="landing-step">
+                    <div class="landing-step-num">3</div>
+                    <h3>Descarcă</h3>
+                    <p>Exportă site-ul ca arhivă — gata de încărcat pe orice hosting static.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="landing-section">
+        <div class="landing-inner">
+            <p class="landing-label">De ce FoliiBuilder</p>
+            <h2>Ce face platforma specială</h2>
+            <div class="landing-features">
+                <div class="landing-feature">
+                    <i class="fas fa-palette"></i>
+                    <h3>Teme profesionale</h3>
+                    <p>8 teme adaptate pentru diferite tipuri de afaceri, cu conținut generat automat.</p>
+                </div>
+                <div class="landing-feature">
+                    <i class="fas fa-eye"></i>
+                    <h3>Preview în timp real</h3>
+                    <p>Fiecare modificare se reflectă instant în previzualizare.</p>
+                </div>
+                <div class="landing-feature">
+                    <i class="fas fa-sliders"></i>
+                    <h3>Module configurabile</h3>
+                    <p>Activează/dezactivează secțiuni și configurează-le cu parametri individuali.</p>
+                </div>
+                <div class="landing-feature">
+                    <i class="fas fa-download"></i>
+                    <h3>Export complet</h3>
+                    <p>Descarcă site-ul gata de publicare — HTML, CSS, JS, totul inclus.</p>
+                </div>
+                <div class="landing-feature">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    <h3>Conținut generat</h3>
+                    <p>Un clic și platforma completează texte, servicii, prețuri realiste.</p>
+                </div>
+                <div class="landing-feature">
+                    <i class="fas fa-mobile-screen"></i>
+                    <h3>Design responsive</h3>
+                    <p>Site-urile generate sunt optimizate pentru desktop, tabletă și mobil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="landing-inner">
+            <p>FoliiBuilder &mdash; platformă de creare site-uri de prezentare</p>
+        </div>
+    </footer>
+</div>
